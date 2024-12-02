@@ -93,4 +93,21 @@ router.delete('/employees/:eid', async (req, res) => {
         })
     }
 });
+router.get('/emp/search', async (req, res) => {
+    const { department, position } = req.query; 
+
+    try {
+        const filter = {};
+        if (department) filter.department = department;
+        if (position) filter.position = position;
+
+        const employees = await Employee.find(filter); 
+        if (!employees.length) {
+            return res.status(404).json({ message: 'No employees found for the given criteria' });
+        }
+        res.status(200).json(employees); 
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching employees', error: error.message });
+    }
+});
 module.exports = router;
