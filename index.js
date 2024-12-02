@@ -10,6 +10,12 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cors());
 
+// Root route
+app.get('/', (req, res) => {
+    res.send('Welcome to the Assignment_01!');
+});
+
+
 // MongoDB connection
 const DB_CONNECTION_STRING = "mongodb+srv://admin:harin123@cluster0.pujm6.mongodb.net/comp3123_assignment1?retryWrites=true&w=majority&appName=Cluster0"
 
